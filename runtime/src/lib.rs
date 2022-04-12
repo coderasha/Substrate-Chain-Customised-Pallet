@@ -302,20 +302,20 @@ impl pallet_template::Config for Runtime {
 // Add this code block to your template for Nicks:
 parameter_types! {
     // Choose a fee that incentivizes desireable behavior.
-    pub const NickReservationFee: u128 = 100;
-    pub const MinNickLength: u32 = 8;
+    pub const AshaReservationFee: u128 = 100;
+    pub const MinAshaLength: u32 = 8;
     // Maximum bounds on storage are important to secure your chain.
-    pub const MaxNickLength: u32 = 32;
+    pub const MaxAshaLength: u32 = 32;
 }
 
-impl pallet_nicks::Config for Runtime {
+impl pallet_asha::Config for Runtime {
     // The Balances pallet implements the ReservableCurrency trait.
     // `Balances` is defined in `construct_runtime!` macro. See below.
     // https://docs.substrate.io/rustdocs/latest/pallet_balances/index.html#implementations-2
     type Currency = Balances;
 
     // Use the NickReservationFee from the parameter_types block.
-    type ReservationFee = NickReservationFee;
+    type ReservationFee = AshaReservationFee;
 
     // No action is taken when deposits are forfeited.
     type Slashed = ();
@@ -325,10 +325,10 @@ impl pallet_nicks::Config for Runtime {
     type ForceOrigin = frame_system::EnsureRoot<AccountId>;
 
     // Use the MinNickLength from the parameter_types block.
-    type MinLength = MinNickLength;
+    type MinLength = MinAshaLength;
 
     // Use the MaxNickLength from the parameter_types block.
-    type MaxLength = MaxNickLength;
+    type MaxLength = MaxAshaLength;
 
     // The ubiquitous event type.
     type Event = Event;
@@ -352,7 +352,7 @@ construct_runtime!(
 		Sudo: pallet_sudo,
 		// Include the custom logic from the pallet-template in the runtime.
 		TemplateModule: pallet_template,
-		Nicks: pallet_nicks,
+		Asha: pallet_asha,
 	}
 );
 
